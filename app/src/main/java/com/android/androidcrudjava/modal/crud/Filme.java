@@ -1,13 +1,22 @@
 package com.android.androidcrudjava.modal.crud;
 
-public class Filme {
+import androidx.annotation.NonNull;
 
-    Long id;
-    String titulo;
-    String ano;
-    String genero;
-    String diretor;
+import java.io.Serializable;
 
+public class Filme implements Serializable {
+
+    private Long id;
+    private String titulo;
+    private String ano;
+    private String genero;
+    private String diretor;
+
+    @NonNull
+    @Override
+    public String toString() {
+        return id + " - " + titulo.toString();
+    }
 
     public Long getId() {
         return id;

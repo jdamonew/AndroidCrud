@@ -1,9 +1,11 @@
 package com.android.androidcrudjava;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,8 +13,14 @@ import com.android.androidcrudjava.banco.crud.CriaBanco;
 import com.android.androidcrudjava.modal.crud.Filme;
 
 public class CadastroFilmes extends AppCompatActivity {
-    Filme filmes;
+
+    Filme filmes = new Filme();
+    Filme editarFilme;
     CriaBanco dbHelper;
+
+    Button btnCadastrar;
+    EditText txtTitulo,txtGenero,txtAno,txtDiretor;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,11 +29,15 @@ public class CadastroFilmes extends AppCompatActivity {
 
         dbHelper = new CriaBanco(CadastroFilmes.this);
 
-        final Button btnCadastrar = (Button) findViewById(R.id.btnCadastrar);
-        final EditText txtTitulo = (EditText) findViewById(R.id.txt1titulo);
-        final EditText txtGenero = (EditText) findViewById(R.id.txt1Genero);
-        final EditText txtAno = (EditText) findViewById(R.id.txt1Ano);
-        final EditText txtDiretor = (EditText) findViewById(R.id.txt1Diretor);
+        Intent intent = getIntent();
+        editarFilme = (Filme) intent.getSerializableExtra("filme");
+
+        btnCadastrar = (Button) findViewById(R.id.btnCadastrar);
+        txtTitulo = (EditText) findViewById(R.id.txt1titulo);
+        txtGenero = (EditText) findViewById(R.id.txt1Genero);
+        txtAno = (EditText) findViewById(R.id.txt1Ano);
+        txtDiretor = (EditText) findViewById(R.id.txt1Diretor);
+
 
         btnCadastrar.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -35,11 +47,10 @@ public class CadastroFilmes extends AppCompatActivity {
                 filmes.setAno(txtAno.getText().toString());
                 filmes.setDiretor(txtDiretor.getText().toString());
 
-                if(btnCadastrar.getText().toString().equals("Cadastrar")){
-                    dbHelper.salvarFilme(filmes);
-                    dbHelper.close();
-
-                }
+                dbHelper.salvarFilme(filmes);
+                Toast.makeText(getApplicationContext(), "Filme Cadastrado: "+ txtTitulo.getText().toString(),Toast.LENGTH_LONG).show();
+                dbHelper.close();
+                finish();
 
             }
         });

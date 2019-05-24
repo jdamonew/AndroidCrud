@@ -14,6 +14,8 @@ import java.util.ArrayList;
 
 public class CriaBanco extends SQLiteOpenHelper {
 
+    private SQLiteDatabase db;
+
     private static final String NOME_BANCO = "sistemafilme";
     private static final String TABELA = "FILMES";
     private static final String ID = "ID";
@@ -31,10 +33,10 @@ public class CriaBanco extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String sql = "CREATE TABLE "+ TABELA+"("
                      +ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"
-                     +TITULO + " TEXT,"
-                     +GENERO + " TEXT,"
-                     + ANO +" TEXT,"
-                     + DIRETOR + " TEXT)";
+                     +TITULO + " TEXT NOT NULL,"
+                     +GENERO + " TEXT NOT NULL,"
+                     + ANO +" TEXT NOT NULL,"
+                     + DIRETOR + " TEXT NOT NULL)";
 
         db.execSQL(sql);
 
@@ -48,7 +50,24 @@ public class CriaBanco extends SQLiteOpenHelper {
     }
 
 
-    public void salvarFilme(Filme filme){
+    public void salvarFilme(Filme filme) {
+        ContentValues values = new ContentValues();
+
+
+        values.put("titulo", filme.getTitulo());
+        values.put("genero", filme.getGenero());
+        values.put("ano", filme.getAno());
+        values.put("diretor", filme.getDiretor());
+
+
+         getWritableDatabase().insert("filmes", null, values);
+
+
+
+    }
+
+    //upadate
+    public boolean alterarFilme(Filme filme){
         ContentValues values = new ContentValues();
 
         values.put("titulo", filme.getTitulo());
@@ -56,22 +75,16 @@ public class CriaBanco extends SQLiteOpenHelper {
         values.put("ano", filme.getAno());
         values.put("diretor", filme.getDiretor());
 
-        getWritableDatabase().insert("filmes", null, values);
+        System.out.println("VALOREEEEEEES: "+values);
+        String[] args = {filme.getId().toString()};
+
+
+        long i = getWritableDatabase().update("filmes", values, "id=?", args);
+        return i == -1 ? false : true;
+
+
     }
-
-    public void alterarFilme(Filme filme){
-        ContentValues values = new ContentValues();
-
-        values.put("titulo", filme.getTitulo());
-        values.put("genero", filme.getGenero());
-        values.put("ano", filme.getAno());
-        values.put("diretor", filme.getDiretor());
-
-        String [] args = {filme.getId().toString()};
-
-        getWritableDatabase().update("filmes", values, "id=?", args);
-    }
-
+    //delete
     public void deletarFilme(Filme filme){
         String [] args = {filme.getId().toString()};
 
