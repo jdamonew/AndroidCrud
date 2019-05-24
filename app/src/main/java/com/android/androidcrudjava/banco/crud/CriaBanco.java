@@ -59,6 +59,25 @@ public class CriaBanco extends SQLiteOpenHelper {
         getWritableDatabase().insert("filmes", null, values);
     }
 
+    public void alterarFilme(Filme filme){
+        ContentValues values = new ContentValues();
+
+        values.put("titulo", filme.getTitulo());
+        values.put("genero", filme.getGenero());
+        values.put("ano", filme.getAno());
+        values.put("diretor", filme.getDiretor());
+
+        String [] args = {filme.getId().toString()};
+
+        getWritableDatabase().update("filmes", values, "id=?", args);
+    }
+
+    public void deletarFilme(Filme filme){
+        String [] args = {filme.getId().toString()};
+
+        getWritableDatabase().delete("filmes", "id=?", args);
+    }
+
 
     public ArrayList<Filme> getLista(){
 

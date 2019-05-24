@@ -14,11 +14,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button btnCadastrar = (Button) findViewById(R.id.btnCadastrar);
+        Button btnCadastrar = (Button) findViewById(R.id.btnCadastrar2);
         btnCadastrar.setOnClickListener(new android.view.View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, AtualizarFilmes.class );
+                Intent intent = new Intent(MainActivity.this, CadastroFilmes.class );
                 startActivity(intent);
             }
         });
