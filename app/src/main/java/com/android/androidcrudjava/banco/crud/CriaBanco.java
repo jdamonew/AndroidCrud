@@ -67,7 +67,7 @@ public class CriaBanco extends SQLiteOpenHelper {
     }
 
     //upadate
-    public boolean alterarFilme(Filme filme){
+    public void alterarFilme(Filme filme){
         ContentValues values = new ContentValues();
 
         values.put("titulo", filme.getTitulo());
@@ -79,8 +79,11 @@ public class CriaBanco extends SQLiteOpenHelper {
         String[] args = {filme.getId().toString()};
 
 
-        long i = getWritableDatabase().update("filmes", values, "id=?", args);
-        return i == -1 ? false : true;
+        //long i = getWritableDatabase().update("filmes", values, "id=?", args);
+
+        getWritableDatabase().update("filmes", values, "id=?", args);
+
+        //return i == -1 ? false : true;
 
 
     }

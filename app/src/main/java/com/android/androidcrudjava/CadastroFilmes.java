@@ -32,7 +32,7 @@ public class CadastroFilmes extends AppCompatActivity {
         Intent intent = getIntent();
         editarFilme = (Filme) intent.getSerializableExtra("filme");
 
-        btnCadastrar = (Button) findViewById(R.id.btnCadastrar);
+        btnCadastrar = (Button) findViewById(R.id.btnCadastrar2);
         txtTitulo = (EditText) findViewById(R.id.txt1titulo);
         txtGenero = (EditText) findViewById(R.id.txt1Genero);
         txtAno = (EditText) findViewById(R.id.txt1Ano);

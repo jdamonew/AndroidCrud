@@ -32,13 +32,21 @@ public class AtualizarFilmes extends AppCompatActivity {
 
         btnAtualizar = (Button) findViewById(R.id.btnAtualizar);
         txtTitulo = (EditText) findViewById(R.id.txt2titulo);
+        txtTitulo.setText(editarFilme.getTitulo());
+
         txtGenero = (EditText) findViewById(R.id.txt2Genero);
+        txtGenero.setText(editarFilme.getGenero());
+
         txtAno = (EditText) findViewById(R.id.txt2Ano);
+        txtAno.setText(editarFilme.getAno());
+
         txtDiretor = (EditText) findViewById(R.id.txt2Diretor);
+        txtDiretor.setText(editarFilme.getDiretor());
 
         btnAtualizar.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+                filmes.setId(editarFilme.getId());
                 filmes.setTitulo(txtTitulo.getText().toString());
                 filmes.setGenero(txtGenero.getText().toString());
                 filmes.setAno(txtAno.getText().toString());

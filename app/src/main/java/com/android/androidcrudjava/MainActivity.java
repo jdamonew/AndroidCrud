@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.widget.ListView;
 
 import com.android.androidcrudjava.banco.crud.CriaBanco;
 import com.android.androidcrudjava.modal.crud.Filme;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
@@ -31,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button btnCadastrar = (Button) findViewById(R.id.btnCadastrar2);
+        FloatingActionButton btnCadastrar = (FloatingActionButton) findViewById(R.id.btnCadastrar2);
         btnCadastrar.setOnClickListener(new android.view.View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
 
                 Filme filmeEscolhido = (Filme) adapter.getItemAtPosition(position);
-
                 Intent i = new Intent(MainActivity.this, AtualizarFilmes.class);
                 i.putExtra("filme", filmeEscolhido);
                 startActivity(i);
