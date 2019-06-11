@@ -1,7 +1,7 @@
 # AndroidCrud
 
 Crud feito em Java para Android
-- Creat
+- Create
 - Read
 - Update
 - Delete
